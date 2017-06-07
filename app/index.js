@@ -35,12 +35,6 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                 'nancy',
                 'classlibrary',
                 'unittest',
-                'fsharp_lib',
-                'fsharp_webapi',
-                'fsharp_console',
-                'fsharp_emptyweb',
-                'fsharp_webbasic',
-                'fsharp_test'
             ];
 
             if (validProjectTypes.indexOf(this.type) === -1) {
@@ -67,14 +61,8 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                         name: 'Empty Web Application',
                         value: 'emptyweb'
                     }, {
-                        name: 'Empty Web Application (F#)',
-                        value: 'fsharp_emptyweb'
-                    }, {
                         name: 'Console Application',
                         value: 'consoleapp'
-                    }, {
-                        name: 'Console Application (F#)',
-                        value: 'fsharp_console'
                     }, {
                         name: 'Web Application',
                         value: 'web'
@@ -82,14 +70,8 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                         name: 'Web Application Basic [without Membership and Authorization]',
                         value: 'webbasic'
                     }, {
-                        name: 'Web Application Basic [without Membership and Authorization] (F#)',
-                        value: 'fsharp_webbasic'
-                    }, {
                         name: 'Web API Application',
                         value: 'webapi'
-                    }, {
-                        name: 'Web API Application (F#)',
-                        value: 'fsharp_webapi'
                     }, {
                         name: 'Nancy ASP.NET Application',
                         value: 'nancy'
@@ -97,14 +79,8 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                         name: 'Class Library',
                         value: 'classlibrary'
                     }, {
-                        name: 'Class Library (F#)',
-                        value: 'fsharp_lib'
-                    }, {
                         name: 'Unit test project (xUnit.net)',
                         value: 'unittest'
-                    }, {
-                        name: 'Unit test project (xUnit.net) (F#)',
-                        value: 'fsharp_test'
                     }]
                 },
                 {
@@ -173,24 +149,6 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                     break;
                 case 'unittest':
                     app = 'UnitTest';
-                    break;
-                case 'fsharp_lib':
-                    app = "ClassLibrary";
-                    break;
-                case 'fsharp_console':
-                    app = "ConsoleApplication";
-                    break;
-                case 'fsharp_webapi':
-                    app = "WebAPIApplication";
-                    break;
-                case 'fsharp_emptyweb':
-                    app = "EmptyWebApplication";
-                    break;
-                case 'fsharp_webbasic':
-                    app = "WebApplicationBasic";
-                    break;
-                case 'fsharp_test':
-                    app = "UnitTest";
                     break;
             }
             var prompts = [{
@@ -367,98 +325,6 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                 this.template(this.sourceRoot() + '/../../global.json', this.applicationName + '/global.json', this.templatedata);
                 break;
 
-                //F# Cases
-            case 'fsharp_lib':
-                this.sourceRoot(path.join(__dirname, '../templates/projects/' + this.type));
-                this.copy(this.sourceRoot() + '/../../gitignore.txt', this.applicationName + '/.gitignore');
-                this.template(this.sourceRoot() + '/Library.fs', this.applicationName + '/Library.fs', this.templatedata);
-                this.fs.copyTpl(this.sourceRoot() + '/project.json', this.applicationName + '/project.json', this.templatedata);
-                this.template(this.sourceRoot() + '/../../global.json', this.applicationName + '/global.json', this.templatedata);
-                break;
-
-            case 'fsharp_console':
-                this.sourceRoot(path.join(__dirname, '../templates/projects/' + this.type));
-                this.fs.copy(path.join(__dirname, '../templates/gitignore.txt'), this.applicationName + '/.gitignore');
-                this.fs.copyTpl(this.templatePath('Program.fs'), this.applicationName + '/Program.fs', this.templatedata);
-                this.fs.copyTpl(this.templatePath('project.json'), this.applicationName + '/project.json', this.templatedata);
-                this.template(this.sourceRoot() + '/../../global.json', this.applicationName + '/global.json', this.templatedata);
-                break;
-
-            case 'fsharp_emptyweb':
-                this.sourceRoot(path.join(__dirname, '../templates/projects/' + this.type));
-
-                this.copy(this.sourceRoot() + '/../../gitignore.txt', this.applicationName + '/.gitignore');
-
-                this.template(this.sourceRoot() + '/Program.fs', this.applicationName + '/Program.fs', this.templatedata);
-
-                this.template(this.sourceRoot() + '/Startup.fs', this.applicationName + '/Startup.fs', this.templatedata);
-
-                this.template(this.sourceRoot() + '/project.json', this.applicationName + '/project.json', this.templatedata);
-
-                this.copy(this.sourceRoot() + '/web.config', this.applicationName + '/web.config');
-
-                this.fs.copyTpl(this.sourceRoot() + '/../../Dockerfile.txt', this.applicationName + '/Dockerfile', this.templatedata);
-                this.fs.copyTpl(this.sourceRoot() + '/../../Dockerfile.nano.txt', this.applicationName + '/Dockerfile.nano', this.templatedata);
-
-                /// Properties
-                this.fs.copyTpl(this.templatePath('Properties/**/*'), this.applicationName + '/Properties', this.templatedata);
-                this.fs.copy(this.sourceRoot() + '/README.md', this.applicationName + '/README.md');
-                mkdirp.sync(this.applicationName + '/wwwroot');
-                this.template(this.sourceRoot() + '/../../global.json', this.applicationName + '/global.json', this.templatedata);
-                break;
-
-            case 'fsharp_webapi':
-                this.sourceRoot(path.join(__dirname, '../templates/projects/' + this.type));
-                this.fs.copy(this.sourceRoot() + '/../../gitignore.txt', this.applicationName + '/.gitignore');
-                this.copy(this.sourceRoot() + '/appsettings.json', this.applicationName + '/appsettings.json');
-                this.fs.copyTpl(this.sourceRoot() + '/../../Dockerfile.txt', this.applicationName + '/Dockerfile', this.templatedata);
-                this.fs.copyTpl(this.sourceRoot() + '/../../Dockerfile.nano.txt', this.applicationName + '/Dockerfile.nano', this.templatedata);
-                this.fs.copyTpl(this.sourceRoot() + '/Startup.fs', this.applicationName + '/Startup.fs', this.templatedata);
-                this.fs.copyTpl(this.sourceRoot() + '/Program.fs', this.applicationName + '/Program.fs', this.templatedata);
-                this.fs.copyTpl(this.sourceRoot() + '/project.json', this.applicationName + '/project.json', this.templatedata);
-                this.fs.copyTpl(this.templatePath('Properties/**/*'), this.applicationName + '/Properties', this.templatedata);
-                this.fs.copyTpl(this.sourceRoot() + '/Controllers.fs', this.applicationName + '/Controllers.fs', this.templatedata);
-                this.fs.copy(this.sourceRoot() + '/web.config', this.applicationName + '/web.config');
-                this.fs.copy(this.sourceRoot() + '/README.md', this.applicationName + '/README.md');
-                mkdirp.sync(this.applicationName + '/wwwroot');
-                this.template(this.sourceRoot() + '/../../global.json', this.applicationName + '/global.json', this.templatedata);
-                break;
-
-            case 'fsharp_webbasic':
-                this.sourceRoot(path.join(__dirname, '../templates/projects/' + this.type));
-                // individual files (configs, etc)
-                this.fs.copyTpl(this.sourceRoot() + '/../../Dockerfile.txt', this.applicationName + '/Dockerfile', this.templatedata);
-                this.fs.copyTpl(this.sourceRoot() + '/../../Dockerfile.nano.txt', this.applicationName + '/Dockerfile.nano', this.templatedata);
-                this.fs.copy(this.templatePath('.bowerrc'), this.applicationName + '/.bowerrc');
-                this.fs.copy(this.templatePath('bundleconfig.json'), this.applicationName + '/bundleconfig.json');
-                this.fs.copy(this.sourceRoot() + '/../../gitignore.txt', this.applicationName + '/.gitignore');
-                this.fs.copyTpl(this.templatePath('bower.json'), this.applicationName + '/bower.json', this.templatedata);
-                this.fs.copyTpl(this.templatePath('appsettings.json'), this.applicationName + '/appsettings.json', this.templatedata);
-                this.fs.copyTpl(this.templatePath('project.json'), this.applicationName + '/project.json', this.templatedata);
-                this.fs.copyTpl(this.templatePath('Program.fs'), this.applicationName + '/Program.fs', this.templatedata);
-                // Properties
-                this.fs.copyTpl(this.templatePath('Properties/**/*'), this.applicationName + '/Properties', this.templatedata);
-                this.fs.copy(this.templatePath('README.md'), this.applicationName + '/README.md');
-                this.fs.copyTpl(this.templatePath('Startup.fs'), this.applicationName + '/Startup.fs', this.templatedata);
-                this.fs.copyTpl(this.templatePath('web.config'), this.applicationName + '/web.config', this.templatedata);
-                // Controllers
-                this.fs.copyTpl(this.templatePath('Controllers.fs'), this.applicationName + '/Controllers.fs', this.templatedata);
-                // Views
-                this.fs.copyTpl(this.templatePath('Views/**/*'), this.applicationName + '/Views', this.templatedata);
-
-                // wwwroot - the content in the wwwroot does not include any direct references or imports
-                // So again it is copied 1-to-1 - but tests cover list of all files
-                this.fs.copy(this.templatePath('wwwroot/**/*'), this.applicationName + '/wwwroot');
-                this.template(this.sourceRoot() + '/../../global.json', this.applicationName + '/global.json', this.templatedata);
-                break;
-
-            case 'fsharp_test':
-                this.sourceRoot(path.join(__dirname, '../templates/projects/' + this.type));
-                this.copy(this.sourceRoot() + '/../../gitignore.txt', this.applicationName + '/.gitignore');
-                this.fs.copyTpl(this.templatePath('**.*'), this.destinationPath(this.applicationName), this.templatedata);
-                this.template(this.sourceRoot() + '/../../global.json', this.applicationName + '/global.json', this.templatedata);
-                break;
-
             default:
                 this.log('Unknown project type');
         }
@@ -473,7 +339,7 @@ var AspnetGenerator = yeoman.generators.Base.extend({
      * --skip-install option
      */
     end: function() {
-        if (!this.options['skip-install'] && (this.type === 'web' || this.type === 'webbasic' || this.type === "fsharp_webbasic")) {
+        if (!this.options['skip-install'] && (this.type === 'web' || this.type === 'webbasic')) {
             process.chdir(this.applicationName);
             this.installDependencies({
                 npm: false,
@@ -507,14 +373,9 @@ var AspnetGenerator = yeoman.generators.Base.extend({
             case 'web':
             case 'webapi':
             case 'webbasic':
-            case 'fsharp_console':
-            case 'fsharp_webapi':
-            case 'fsharp_webbasic':
-            case 'fsharp_emptyweb':
                 this.log(chalk.green('    dotnet run'));
                 break;
             case 'unittest':
-            case 'fsharp_test':
                 this.log(chalk.green('    dotnet test'));
                 break;
         }

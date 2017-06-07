@@ -62,8 +62,6 @@ The [Docker](https://www.docker.com/) support with `Dockerfile` configuration fi
 
 The Unit test project uses [xUnit: a free, open source, community-focused unit testing tool for the .NET Framework](https://xunit.github.io/)
 
-The F# Templates are based on [Core F# Templates](https://github.com/odytrice/core-fsharp-templates) projects. They were translated into F# from the original [ASP.NET Templates](https://github.com/aspnet/Templates) 
-
 The templates that use client-side libraries are calling the `bower install` script to install Bower managed dependencies. You can skip the installation process by passing the `--skip-install` option to the generator, e.g. `yo aspnet --skip-install`. This should allow for a better experience when `Development` has been enabled.
 
 ## Command line automation
@@ -82,12 +80,6 @@ The valid project types are:
 - `nancy` for Nancy ASP.NET Application
 - `classlibrary` for Class Library
 - `unittest` Unit Test project (xUnit.net)
-- `fsharp_emptyweb` for F# Empty Web Application
-- `fsharp_console` for F# Console Application
-- `fsharp_lib` for F# Class Library
-- `fsharp_webapi` for F# Web API Application
-- `fsharp_webbasic` for F# Web Application Basic
-- `fsharp_test` for F# Unit Test project (xUnit.net)
 
 The valid UI framework types are:
 

@@ -1,0 +1,78 @@
+{
+    "name": "generator-wsu-fais-vs15",
+    "fork": "generator-aspnet",
+    "version": "0.2.6",
+    "description": "Yeoman generator for ASP.NET Core apps",
+    "license": "Apache-2.0",
+    "main": "app/index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jeremyBass/generator-wsu-fais-vs15.git"
+    },
+    "contributors": [{
+            "name": "Sourabh Shirhatti",
+            "email": "shirhatti@outlook.com",
+            "url": "https://github.com/shirhatti"
+        },
+        {
+            "name": "Sayed Hashimi",
+            "email": "sayed.hashimi@gmail.com"
+        },
+        {
+            "name": "Shayne Boyer",
+            "email": "spboyer@live.com",
+            "url": "https://github.com/spboyer"
+        },
+        {
+            "name": "Jonathan Channon",
+            "email": "jonathan@jonathanchannon.com",
+            "url": "https://github.com/jchannon"
+        },
+        {
+            "name": "Peter Blazejewicz",
+            "email": "peter.blazejewicz@gmail.com",
+            "url": "https://github.com/peterblazejewicz"
+        },
+        {
+            "name": "Suhas Joshi",
+            "email": "suhasbjoshi@hotmail.com"
+        }
+    ],
+    "engines": {
+        "node": ">=0.10.0"
+    },
+    "keywords": [
+        "yeoman-generator",
+        "ASP.NET",
+        "ASP.NET Core",
+        "aspnet",
+        "aspnet core",
+        "ASP",
+        ".net",
+        "net",
+        "core",
+        "dnx"
+    ],
+    "dependencies": {
+        "chai": "^3.3.0",
+        "chalk": "^1.1.3",
+        "findup-sync": "^0.3.0",
+        "mkdirp": "^0.5.1",
+        "nconf": "^0.8.2",
+        "uuid": "^2.0.1",
+        "vs_projectname": "^1.0.0",
+        "yeoman-generator": "^0.19.2",
+        "yosay": "^1.2.0"
+    },
+    "devDependencies": {
+        "mocha": "^2.3.3"
+    },
+    "scripts": {
+        "test": "mocha"
+    },
+    "gitHead": "f5e3e67ed713c2a95c539ff5ca81bef7e5126999",
+    "bugs": {
+        "url": "https://github.com/jeremyBass/generator-wsu-fais-vs15/issues"
+    },
+    "homepage": "https://github.com/jeremyBass/generator-wsu-fais-vs15#readme"
+}

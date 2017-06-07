@@ -1,9 +1,58 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7]> <html class="no-js no-svg lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="<?=$lang ?>"> <![endif]-->
+<!--[if IE 7]><html class="no-js no-svg lt-ie10 lt-ie9 lt-ie8" lang="<?=$lang ?>"> <![endif]-->
+<!--[if IE 8]><html class="no-js no-svg lt-ie10 lt-ie9" lang="<?=$lang ?>"> <![endif]-->
+<!--[if IE 9]><html class="no-js lt-ie10" lang="<?=$lang ?>"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="<?=$lang ?>">
+<!--<![endif]-->
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - <%= namespace %></title>
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="https://repo.wsu.edu/spine/1/favicon.ico" />
+
+    <!-- dns-prefetch -->
+    <link rel='dns-prefetch' href='//ajax.googleapis.com' />
+    <link rel='dns-prefetch' href='//repo.wsu.edu' />
+    <link rel='dns-prefetch' href='//webcore.fais.wsu.edu' />
+    <link rel='dns-prefetch' href='//code.jquery.com' />
+    <link rel='dns-prefetch' href='//fonts.googleapis.com' />
+    <link rel='dns-prefetch' href='//s.w.org' />
+
+    @{
+        string controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+        string actionName = this.ViewContext.RouteData.Values["action"].ToString();
+
+        Random rnd = new Random();
+        int randomNumber = rnd.Next(1, 4);
+        string random = "";
+        if (controllerName == "Home" && actionName == "ProfileIndex")
+        {
+            random = "random_" + randomNumber;
+        }
+    }
+    @{
+        string environmentName = "";
+    }
+    <environment names="Development">
+        @{
+            environmentName = "development";
+        }
+    </environment> <environment names="Staging">
+        @{
+            environmentName = "staging";
+        }
+    </environment> <environment names="Production">
+        @{
+            environmentName = "production";
+        }
+    </environment>
+
+
+
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -15,36 +64,35 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+
+        <!-- for printing service -->
+        <style type="text/css" media="print">body:not(.printable) * {  display: none; } </style>
+        <base href="@url" />
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><%= namespace %></a>
+<body class='@random @environmentName @controllerName @actionName window-fill overflow-hidden @if (Context.Request.Query["printable"] == "1") { @Html.Raw("printable") } '>
+    <div id="p_area">
+        @if (Context.Request.Query["printable"] == "1")
+        {
+            <div id="p_tar">@RenderBody()</div>
+        }
+        else
+        {
+            <div class="fixed-top window-fill" id="content_wrap">
+                <div id="content_area" class="pad-airy">
+                    <div id="p_tar">@RenderBody()</div>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-                @await Html.PartialAsync("_LoginPartial")
-            </div>
-        </div>
+            @await Html.PartialAsync("_header")
+            @await Html.PartialAsync("_footer")
+
+        }
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2016 - <%= namespace %></p>
-        </footer>
-    </div>
+
+    <script>
+            window.environment = "@environmentName";
+            window.controller = "@controllerName";
+            window.veiw = "@actionName";
+    </script>
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

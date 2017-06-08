@@ -12,6 +12,13 @@ using Microsoft.Extensions.Logging;
 using <%= namespace %>.Data;
 using <%= namespace %>.Models;
 using <%= namespace %>.Services;
+using Microsoft.AspNetCore.Identity;
+using DataTables.AspNet.AspNetCore;
+using Microsoft.AspNetCore.Session;
+using Microsoft.AspNetCore.ResponseCompression;
+using System.IO.Compression;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace <%= namespace %>
 {
@@ -42,10 +49,6 @@ namespace <%= namespace %>
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {

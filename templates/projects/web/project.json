@@ -2,6 +2,8 @@
     "userSecretsId": "aspnet-<%= namespace %>-<%= guid %>",
 
     "dependencies": {
+        "CsvHelper": "3.0.0-beta7",
+        "DataTables.AspNet.AspNetCore": "2.0.2",
         "Microsoft.NETCore.App": {
             "version": "1.1.0",
             "type": "platform"
@@ -44,11 +46,18 @@
         "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
             "version": "1.1.0-preview4-final",
             "type": "build"
-        }
+        },
+
+        "Novell.Directory.Ldap.NETStandard": "2.3.6",
+        "Microsoft.AspNetCore.Session": "1.1.0",
+        "Microsoft.NETCore": "5.0.1-rc2-24027",
+        "BundlerMinifier.Core": "2.4.337",
+        "Microsoft.AspNetCore.ResponseCompression": "1.0.1",
+        "Microsoft.AspNetCore.Cors": "1.1.1"
     },
 
     "tools": {
-        "BundlerMinifier.Core": "2.2.306",
+        "BundlerMinifier.Core": "2.4.337",
         "Microsoft.AspNetCore.Razor.Tools": "1.1.0-preview4-final",
         "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.1.0-preview4-final",
         "Microsoft.EntityFrameworkCore.Tools.DotNet": "1.1.0-preview4-final",

@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using <%= namespace %>.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div id="local_nav_set" style="z-index:100" class="btns margin-airy-r margin-no-at-667 closed" role="group" aria-label="First group">
+        <a href="#" id="nav_set_slide_handle" class="btn pad-hair-lr"><i class="fa fa-angle-double-left"></i></a>
+        <div class="btns pad-no sub_nav" role="group" style="width: 0px; overflow: hidden; height: 31px;max-width: 100vw;">
+            <div class="btns pad-no " role="group" style="height: 31px; min-width: 362px;max-width: 100vw;">@* ok a little hard coded, fix this*@
+                <a href="~/accounts" class="btn">Accounts</a>
+                <a href="~/agencies" class="btn">Agencies</a>
+                <a href="~/awards" class="btn">Awards</a>
+                <a href="~/expenses" class="btn">Expenses</a>
+                <a href="~/expense_type" class="btn">Expense types</a>
+            </div>
+        </div>
+        <a href="~/invoice" class="btn">Invoicing</a>
+    </div>
+}
+else
+{
+
+}

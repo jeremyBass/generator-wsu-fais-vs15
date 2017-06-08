@@ -3,24 +3,23 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@{
+    ApplicationUser user = await UserManager.GetUserAsync(User);
+}
 
-@if (SignInManager.IsSignedIn(User))
+@if (SignInManager.IsSignedIn(User) && null != user)
 {
-    <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-            </li>
-            <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>
-            </li>
-        </ul>
+
+    <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="btns no-pad margin-no" role="group" aria-label="First group">
+        <a asp-area="" asp-controller="Account" asp-action="Profile" title="Manage" class="btn"><span class="display-none-at-667">Hello @*@user.FullName!*@</span><span class="display-none display-inline-at-667">Profile</span></a>
+        <button type="submit" class="btn">Log off</button>
     </form>
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
-        <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
-    </ul>
+
+    <div class="btns pad-airy-r" role="group" aria-label="First group">
+        <a asp-area="" asp-controller="Account" asp-action="Register" class="btn">Register</a>
+        <a asp-area="" asp-controller="Account" asp-action="Login" class="btn">Log in</a>
+    </div>
 }

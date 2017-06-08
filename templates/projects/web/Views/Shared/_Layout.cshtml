@@ -21,21 +21,21 @@
     <link rel='dns-prefetch' href='//code.jquery.com' />
     <link rel='dns-prefetch' href='//fonts.googleapis.com' />
     <link rel='dns-prefetch' href='//s.w.org' />
-
     @{
-        string controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
-        string actionName = this.ViewContext.RouteData.Values["action"].ToString();
+        String url = new Uri(String.Format("{0}://{1}", Context.Request.Scheme, Context.Request.Host)).ToString().TrimEnd('/');
+        String controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+        String actionName = this.ViewContext.RouteData.Values["action"].ToString();
 
         Random rnd = new Random();
         int randomNumber = rnd.Next(1, 4);
-        string random = "";
+        String random = "";
         if (controllerName == "Home" && actionName == "ProfileIndex")
         {
             random = "random_" + randomNumber;
         }
     }
     @{
-        string environmentName = "";
+        String environmentName = "";
     }
     <environment names="Development">
         @{

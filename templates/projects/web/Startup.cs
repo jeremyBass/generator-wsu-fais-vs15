@@ -22,6 +22,19 @@ using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace <%= namespace %>
 {
+    public class ViewLocationExpander : IViewLocationExpander
+    {
+        public void PopulateValues(ViewLocationExpanderContext context) {}
+
+        public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context, IEnumerable<string> viewLocations)
+        {
+            return new[]
+            {
+                "/Theme/Views/{1}/{0}.cshtml",
+                "/Theme/Views/Shared/{0}.cshtml"
+            };//.Union(viewLocations);
+        }
+}
     public class Startup
     {
         public Startup(IHostingEnvironment env)
@@ -46,6 +59,10 @@ namespace <%= namespace %>
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                options.ViewLocationExpanders.Add(new ViewLocationExpander());
+            });
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));

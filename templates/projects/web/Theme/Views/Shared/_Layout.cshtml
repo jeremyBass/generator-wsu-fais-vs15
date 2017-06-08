@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js no-svg lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="<?=$lang ?>"> <![endif]-->
+<!--[if IE 7]><html class="no-js no-svg lt-ie10 lt-ie9 lt-ie8" lang="<?=$lang ?>"> <![endif]-->
+<!--[if IE 8]><html class="no-js no-svg lt-ie10 lt-ie9" lang="<?=$lang ?>"> <![endif]-->
+<!--[if IE 9]><html class="no-js lt-ie10" lang="<?=$lang ?>"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="<?=$lang ?>">
+<!--<![endif]-->
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SPS Invoicing</title>
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="https://repo.wsu.edu/spine/1/favicon.ico" />
+
+    <!-- DOCS -->
+    <link type="text/plain" rel="author" href="https://repo.wsu.edu/spine/1/authors.txt" />
+    <link type="text/html" rel="help" href="https://brand.wsu.edu/media/web" />
+
+    <link rel='dns-prefetch' href='//ajax.googleapis.com' />
+    <link rel='dns-prefetch' href='//repo.wsu.edu' />
+    <link rel='dns-prefetch' href='//webcore.fais.wsu.edu' />
+    <link rel='dns-prefetch' href='//code.jquery.com' />
+    <link rel='dns-prefetch' href='//fonts.googleapis.com' />
+    <link rel='dns-prefetch' href='//s.w.org' />
+    @{
+        string controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+        string actionName = this.ViewContext.RouteData.Values["action"].ToString();
+
+        Random rnd = new Random();
+        int randomNumber = rnd.Next(1, 4);
+        string random = "";
+        if (controllerName == "Home" && actionName == "ProfileIndex")
+        {
+            random = "random_" + randomNumber;
+        }
+    }
+    @{
+        string environmentName = "";
+    }
+    <environment names="Development">
+        @{
+            environmentName = "development";
+        }
+    </environment> <environment names="Staging">
+        @{
+            environmentName = "staging";
+        }
+    </environment> <environment names="Production">
+        @{
+            environmentName = "production";
+        }
+    </environment>
+        <link rel='stylesheet' id='jQueryUICSS-css' href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' type='text/css' media='all' />
+        @{
+            String url = new Uri(String.Format("{0}://{1}", Context.Request.Scheme, Context.Request.Host)).ToString().TrimEnd('/');
+        }
+    <environment names="Development,Staging,Production">
+        <link rel="stylesheet" href="//webcore.fais.wsu.edu/resources/wsu.global.ns/0.1.0/vendors/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="//webcore.fais.wsu.edu/resources/wsu.global.ns/0.1.0/vendors/bootstrap3-dialog/dist/css/bootstrap-dialog.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="//webcore.fais.wsu.edu/resources/flexed/0.1.0/extra/flexed-typography.css" asp-append-version="true" />
+        <link rel="stylesheet" href="//webcore.fais.wsu.edu/resources/flexed/0.1.0/extra/flexed-ui.css" asp-append-version="true" />
+        <link rel="stylesheet" href="//webcore.fais.wsu.edu/resources/flexed/0.1.0/extra/datatables/dataTables.flexed.css" asp-append-version="true" />
+        <link rel="stylesheet" href="//webcore.fais.wsu.edu/resources/flexed/0.1.0/custom.css" asp-append-version="true" />
+        <link rel="stylesheet" href="@url/css/site.css" asp-append-version="true" />
+    </environment>
+        @*
+            <!--
+            <environment names="Staging,Production">
+                <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
+                      asp-fallback-href="@url/lib/bootstrap/dist/css/bootstrap.min.css"
+                      asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+                <link rel="stylesheet" href="@url/lib/DataTables-1.10.13/media/css/dataTables.bootstrap.min.css" />
+                <link rel="stylesheet" href="@url/lib/bootstrap3-dialog/dist/css/bootstrap-dialog.min.css" />
+
+                <link rel="stylesheet" href="//webcore.fais.wsu.edu/resources/flexed/0.1.0/extra/flexed-typography.css" />
+                <link rel="stylesheet" href="//webcore.fais.wsu.edu/resources/flexed/0.1.0/extra/flexed-ui.css" />
+                <link rel="stylesheet" href="//webcore.fais.wsu.edu/resources/flexed/0.1.0/custom.css" />
+                <link rel="stylesheet" href="@url/css/site.min.css" asp-append-version="true" />
+            </environment>
+            -->
+        *@
+        <style type="text/css" media="print">
+            body:not(.printable) * {
+                display: none;
+            }
+        </style>
+        <base href="@url" />
+</head>
+<body class='@random @environmentName @controllerName @actionName window-fill overflow-hidden @if (Context.Request.Query["printable"] == "1") { @Html.Raw("printable") } @ViewData["invoice_state"]'>
+
+
+    <div id="p_area">
+        @if (Context.Request.Query["printable"] == "1")
+        {
+            <div id="p_tar">@RenderBody()</div>
+        }
+        else
+        {
+            <div class="fixed-top window-fill" id="content_wrap">
+                <div id="content_area" class="pad-airy">
+                    <div id="p_tar">@RenderBody()</div>
+                </div>
+            </div>
+            @await Html.PartialAsync("_footer")
+            <div class="no-print fixed-top z-index-4  full-width paper" id="header_bar" style="z-index: 101;">
+                <div id="main_menu" class="z-index-2">
+                    <label for="menu-state" id="wsu-signature">Washington State University</label>
+                    <input type="checkbox" id="menu-state">
+                    <div id="nav_area">
+                        @await Html.PartialAsync("_main_nav")
+                    </div><!---->
+                </div>
+                <a href="/" id="home_link"><span class="display-none-at-667">Sponsored Programs Services</span><span class="display-none display-inline-at-667">SPS</span></a>
+                @{ await Html.RenderPartialAsync("_header"); }
+                <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
+                    @await Html.PartialAsync("_ToolBar")
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
+            </div>
+        }
+    </div>
+
+    <environment names="Development,Staging">
+        <div class="fixed-top offset-fifths-1-t" style="z-index: 101;">
+            <p class="alert danger margin-no round-no-l round-wide-r">Dev</p>
+        </div>
+    </environment>
+    <script>
+            window.environment = "@environmentName";
+            window.controller = "@controllerName";
+            window.veiw = "@actionName";
+    </script>
+    <environment names="Development">
+        <script type="text/javascript" src="//webcore.fais.wsu.edu/resources/wsu.global.ns/0.1.0/vendors/moment/moment.js"></script>
+        <script type="text/javascript" src="//webcore.fais.wsu.edu/resources/wsu.global.ns/0.1.0/vendors/accounting/accounting.js"></script>
+        <script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="//webcore.fais.wsu.edu/resources/wsu.global.ns/0.1.0/vendors/bootstrap/dist/js/bootstrap.js"></script>
+        <script type="text/javascript" src="//webcore.fais.wsu.edu/resources/wsu.global.ns/0.1.0/vendors/datatables/1.10.13/media/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="//webcore.fais.wsu.edu/resources/wsu.global.ns/0.1.0/vendors/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js"></script>
+        <script type="text/javascript" src="//webcore.fais.wsu.edu/resources/wsu.global.ns/0.1.0/vendors/typeahead.bundle/typeahead.bundle.js"></script>
+
+        <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js'></script>
+        <!--  <script type="text/javascript" src="@url/lib/jPrint.js"></script> -->
+        <script src="https://webcore.fais.wsu.edu/resources/wsu.global.ns/1/js/mainline.js"></script>
+        <script type="text/javascript" src="//webcore.fais.wsu.edu/resources/flexed/0.1.0/extra/datatables/dataTables.flexed.js"></script>
+        <script>
+            WSU.prime("state.debug",WSU,{value:true});
+        </script>
+
+
+        <script src="@url/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+
+    </environment>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

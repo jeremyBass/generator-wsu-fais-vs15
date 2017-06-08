@@ -905,3 +905,524 @@ div.dataTables_wrapper div.dataTables_processing {
         margin: 0;
     }
 }
+
+body {
+    font-family: 'Roboto', sans-serif;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+
+/* Wrapping element */
+
+
+/* Set some basic padding to keep content from hitting the edges */
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+/* Carousel */
+
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+
+/* buttons and links extension to use brackets: [ click me ] */
+
+.btn-bracketed::before {
+    display: inline-block;
+    content: "[";
+    padding-right: 0.5em;
+}
+
+.btn-bracketed::after {
+    display: inline-block;
+    content: "]";
+    padding-left: 0.5em;
+}
+
+
+/* Make .svg files in the carousel display properly in older browsers */
+
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+
+/* Hide/rearrange for smaller screens */
+
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none
+    }
+}
+
+#header_bar {
+    background: #fff;
+}
+
+.development #header_bar {
+    background: #FF5722;
+}
+
+#content_wrap {
+    margin: 3.1rem 0 3rem 0;
+    overflow: auto;
+    height: calc(100vh - (3.1rem + 3rem));
+    background: #f1f1f1;
+}
+
+.paper {
+    background: #ffffff;
+}
+
+div#main_menu {
+    background-color: #3b4042;
+    height: 62px;
+    display: block;
+    /*text-indent: 120%;
+    overflow: hidden;*/
+    white-space: nowrap;
+    z-index: 99;
+    width: 62px;
+    position: absolute;
+    top: 0;
+    left: 5rem;
+    color: #e6e6e6;
+}
+
+#wsu-signature {
+    cursor: pointer;
+}
+
+#menu-state {
+    height: 0;
+    width: 0;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#nav_area {
+    opacity: 0;
+    transform: scale3d(.1, .1, .1) translate3d( 0, -1000px, 0);
+    height: 100vh;
+    /*height: 0;
+    width:0;*/
+    overflow: hidden;
+    background-color: #3b4042;
+    max-height: calc(100vh - (3.1rem + 3.4rem));
+    /*padding-right:2.75rem;*/
+    padding-top: 3.6rem;
+    padding-bottom: 3.6rem;
+    top: 2.9rem;
+    /*top:3.1rem;*/
+    left: 0;
+    position: absolute;
+    overflow-wrap: break-word;
+    box-shadow: 0 3px 1px -2px rgba(31, 25, 0, .2), 0 2px 2px 0 rgba(31, 25, 0, .14), 0 1px 5px 0 rgba(31, 25, 0, .12), 0 5px 5px -3px rgba(31, 25, 0, .2), 0 8px 10px 1px rgba(31, 25, 0, .14), 0 3px 14px 2px rgba(31, 25, 0, .12);
+}
+
+#nav_area * {
+    overflow-wrap: break-word;
+}
+
+#nav_area {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+#nav_area:hover,
+#nav_area:focus {
+    overflow-y: auto;
+}
+
+#localfooter {
+    z-index: 999
+}
+
+#nav_area ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav_area ul li {
+    border-top: 1px solid rgba(132, 132, 132, 0.64);
+}
+
+#nav_area ul li li {
+    background: rgba(117, 117, 117, 0.21);
+}
+
+#nav_area ul ul {
+    height: 0;
+    /*overflow: hidden;*/
+}
+
+#nav_area ul li a {
+    color: #e2e2e2;
+    font-size: 1.6rem;
+    margin: 0.1rem 1.8rem 0.1rem 0;
+    line-height: 2.6rem;
+    display: inline-block;
+    /* border: 1px solid rgba(132, 132, 132, 0.64); */
+    width: 100%;
+    padding-left: 1rem;
+    position: relative;
+}
+
+#nav_area ul li li a {
+    padding-left: 3.25rem;
+}
+
+#nav_area ul li li li a {
+    padding-left: 6.5rem;
+}
+
+#nav_area ul li li li li a {
+    padding-left: 8.5rem;
+}
+
+#nav_area ul li li li li li a {
+    padding-left: 10.5rem;
+}
+
+#nav_area ul li a:hover,
+#nav_area ul li a.active {
+    color: #1b1b1b;
+    background: rgba(255, 255, 255, 0.75);
+}
+
+#nav_area ul li a~ul {
+    height: 0;
+    transition: all 0.15s ease-in-out;
+}
+
+#nav_area ul li a.open~ul {
+    height: auto;
+    transition: all 0.5s ease-in-out;
+}
+
+#nav_area ul li a~ul li {
+    height: 0;
+    transition: all 0.15s ease-in-out;
+    opacity: 0;
+}
+
+#nav_area ul li a.open~ul>li {
+    height: auto;
+    opacity: 1;
+    transition: all 0.5s ease-in-out;
+}
+
+label#wsu-signature:after {
+    content: "\f0c9";
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 3.9rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 0;
+    display: block;
+    opacity: 1;
+    z-index: 9999999;
+    width: 64px;
+    text-align: center;
+    text-indent: 0;
+    height: 52px;
+    background-color: #3b4042;
+    line-height: 52px;
+    animation-name: fadeOut;
+    animation-duration: .75s;
+    animation-fill-mode: both;
+}
+
+label#wsu-signature:hover:after {
+    animation-name: fadeIn;
+    animation-duration: .75s;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+label#wsu-signature:hover:before {
+    animation-name: fadeIn;
+    animation-duration: .75s;
+    animation-fill-mode: both;
+}
+
+label#wsu-signature:before {
+    content: "Menu";
+    font-size: 1.7rem;
+    position: absolute;
+    top: 1.9rem;
+    left: 0;
+    margin-left: 0;
+    display: block;
+    opacity: 1;
+    z-index: 99999999;
+    width: 64px;
+    text-align: center;
+    text-indent: 0;
+    height: 62px;
+    line-height: 62px;
+    animation-name: fadeOut;
+    animation-duration: .75s;
+    animation-fill-mode: both;
+}
+
+#nav_area ul li a.external:after {
+    content: "\f064";
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 0.9rem;
+    position: relative;
+    top: -7px;
+    margin-left: 0.6rem;
+    display: inline-block;
+    opacity: .85;
+}
+
+#nav_area ul li a.external:hover:after {
+    opacity: 1;
+    animation: goingTo ease-in-out 1s;
+    animation-iteration-count: 1;
+    transform-origin: 0% 0%;
+    animation-fill-mode: forwards;
+    /*when the spec is finished*/
+}
+
+@keyframes goingTo {
+    0% {
+        transform: translate(0px, 0px);
+    }
+    31% {
+        transform: translate(2px, -2px);
+    }
+    50% {
+        transform: translate(-1px, -1px);
+    }
+    80% {
+        transform: translate(2px, -3px);
+    }
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
+
+#menu-state:checked~#nav_area span#close-nav {
+    /* text-indent:-9999px; */
+    font-size: 0px;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+}
+
+#menu-state:checked~#nav_area span#close-nav:after {
+    content: "\f00d";
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 2rem;
+    margin-left: 0.6rem;
+    display: inline-block;
+    color: #fff;
+    cursor: pointer;
+}
+
+#menu-state:checked~#nav_area span#close-nav:hover:after {
+    color: #cc4747;
+}
+
+#nav_area ul li a:hover~ul {
+    position: relative;
+}
+
+#nav_area ul li a:hover~ul::after {
+    content: "\f107";
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.5rem;
+    margin-left: 0.6rem;
+    display: inline-block;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    top: -23px;
+    right: 5px;
+    color: #1b1b1b;
+}
+
+#nav_area ul li a.open:hover~ul::after {
+    content: "\f00d";
+    color: #cc4747;
+}
+
+@keyframes flipInY {
+    0% {
+        -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+        transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+        -webkit-transition-timing-function: ease-in;
+        transition-timing-function: ease-in;
+        opacity: 0;
+    }
+    40% {
+        transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+        transition-timing-function: ease-in;
+    }
+    100% {
+        -webkit-transform: perspective(400px);
+        transform: perspective(400px);
+        opacity: 1;
+    }
+}
+
+@keyframes flipOUTY {
+    0% {
+        -webkit-transform: perspective(400px);
+        transform: perspective(400px);
+        opacity: 1;
+    }
+    40% {
+        transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+        transition-timing-function: ease-in;
+    }
+    100% {
+        transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+        transition-timing-function: ease-in;
+        opacity: 0;
+    }
+}
+
+#menu-state:checked~#nav_area {
+    -webkit-backface-visibility: visible !important;
+    backface-visibility: visible !important;
+    -webkit-animation-name: flipInY;
+    animation-name: flipInY;
+    -webkit-animation-duration: 1s;
+    animation-duration: .15s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+#nav_area:not(:checked)~#nav_area {
+    -webkit-backface-visibility: visible !important;
+    backface-visibility: visible !important;
+    -webkit-animation-name: flipOUTY;
+    animation-name: flipOUTY;
+    -webkit-animation-duration: 1s;
+    animation-duration: .15s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+#wsu-signature {
+    background-repeat: no-repeat;
+    background-position: center 9px;
+    background-size: 40px auto;
+    background-color: #3b4042;
+    height: 62px;
+    display: block;
+    text-indent: 120%;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 99;
+    width: 64px;
+    position: relative;
+    /*position: absolute;
+    top: 0;
+    left: 5rem;*/
+    background-image: url(/images/wsu-bug-white.svg);
+}
+
+a#home_link {
+    background-repeat: no-repeat;
+    background-position: center 9px;
+    background-size: 40px auto;
+    height: 31px;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    position: absolute;
+    left: 12rem;
+    font-size: 2.4rem;
+    line-height: 2.9rem;
+    font-weight: 700;
+    color: #616567;
+}
+
+.development a#home_link {
+    color: #f5f5f5;
+}
+
+@media only screen and (max-width: 996px) {
+    a#home_link {
+        left: 8rem;
+        font-size: 2.4rem;
+        line-height: 2.9rem;
+        font-weight: 700;
+    }
+    div#main_menu {
+        width: 62px;
+        top: 0;
+        left: 1rem;
+    }
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+    background-color: #3a414c;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+    color: #515d6f;
+    background-color: #f5f5f5;
+    border: .1rem solid #ddd;
+}

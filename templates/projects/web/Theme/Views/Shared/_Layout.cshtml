@@ -52,7 +52,7 @@
             environmentName = "production";
         }
     </environment>
-        <link rel='stylesheet' id='jQueryUICSS-css' href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='jQueryUICSS-css' href='//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' type='text/css' media='all' />
         @{
             String url = new Uri(String.Format("{0}://{1}", Context.Request.Scheme, Context.Request.Host)).ToString().TrimEnd('/');
         }
@@ -122,11 +122,11 @@
         }
     </div>
 
-    <environment names="Development,Staging">
+    <!--<environment names="Development,Staging">
         <div class="fixed-top offset-fifths-1-t" style="z-index: 101;">
             <p class="alert danger margin-no round-no-l round-wide-r">Dev</p>
         </div>
-    </environment>
+    </environment>-->
     <script>
             window.environment = "@environmentName";
             window.controller = "@controllerName";
@@ -135,15 +135,15 @@
     <environment names="Development">
         <script type="text/javascript" src="//webcore.fais.wsu.edu/resources/wsu.global.ns/0.1.0/vendors/moment/moment.js"></script>
         <script type="text/javascript" src="//webcore.fais.wsu.edu/resources/wsu.global.ns/0.1.0/vendors/accounting/accounting.js"></script>
-        <script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.min.js"></script>
         <script type="text/javascript" src="//webcore.fais.wsu.edu/resources/wsu.global.ns/0.1.0/vendors/bootstrap/dist/js/bootstrap.js"></script>
         <script type="text/javascript" src="//webcore.fais.wsu.edu/resources/wsu.global.ns/0.1.0/vendors/datatables/1.10.13/media/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="//webcore.fais.wsu.edu/resources/wsu.global.ns/0.1.0/vendors/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js"></script>
         <script type="text/javascript" src="//webcore.fais.wsu.edu/resources/wsu.global.ns/0.1.0/vendors/typeahead.bundle/typeahead.bundle.js"></script>
 
-        <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js'></script>
+        <script type='text/javascript' src='//code.jquery.com/ui/1.12.1/jquery-ui.min.js'></script>
         <!--  <script type="text/javascript" src="@url/lib/jPrint.js"></script> -->
-        <script src="https://webcore.fais.wsu.edu/resources/wsu.global.ns/1/js/mainline.js"></script>
+        <script src="//webcore.fais.wsu.edu/resources/wsu.global.ns/1/js/mainline.js"></script>
         <script type="text/javascript" src="//webcore.fais.wsu.edu/resources/flexed/0.1.0/extra/datatables/dataTables.flexed.js"></script>
         <script>
             WSU.prime("state.debug",WSU,{value:true});

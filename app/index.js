@@ -142,6 +142,7 @@ var AspnetGenerator = yeoman.generators.Base.extend({
             this.prompt(prompts, function(props) {
                 this.type = props.type;
                 this.ui = props.ui;
+                this.features = props.features;
                 done();
             }.bind(this));
         }
@@ -153,6 +154,7 @@ var AspnetGenerator = yeoman.generators.Base.extend({
         this.templatedata.guid = guid.v4();
         this.templatedata.sqlite = (this.type === 'web') ? true : false;
         this.templatedata.ui = this.ui;
+        this.templatedata.features = this.features;
         this.templatedata.version = "1.0.0-preview2-003131";
     },
 
@@ -281,6 +283,7 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                 this.fs.copyTpl(this.templatePath('Services/MessageServices.cs'), this.applicationName + '/Services/MessageServices.cs', this.templatedata);
                 // Views
                 this.fs.copyTpl(this.templatePath('Views/**/*'), this.applicationName + '/Views', this.templatedata);
+                this.fs.copyTpl(this.templatePath('Theme/**/*'), this.applicationName + '/Theme', this.templatedata);
                 // wwwroot
                 // wwwroot - the content in the wwwroot does not include any direct references or imports
                 // So again it is copied 1-to-1 - but tests cover list of all files

@@ -36,7 +36,19 @@
 @:
         //    PushIndent("    ");
     }
-@:<form asp-action="@Model.ViewName">
+@:<form asp-action="@Model.ViewName" class="
+     offset-tenths-2-sides
+     tenths-6
+     offset-tenths-1-sides-at-996
+     tenths-8-at-996
+     offset-twelths-1-sides-at-667
+     twelths-10-at-667
+     margin-no-at-480
+     full-width-at-480
+     round-mini
+     z-index-4
+     pad-airy
+     paper">
     @:<div class="form-horizontal">
         @:<h4>@Model.ViewDataTypeShortName</h4>
         @:<hr />
@@ -58,9 +70,9 @@
 
             if (property.IsForeignKey)
             {
-        @:<div class="form-group">
-            @:<label asp-for="@property.PropertyName" class="control-label col-md-2"></label>
-            @:<div class="col-md-10">
+        @:<div class="pad-tight-b flex-row">
+            @:<label asp-for="@property.PropertyName" class="control-label tenths-3"></label>
+            @:<div class="tenths-7">
                 @:<select asp-for="@property.PropertyName" class="form-control" asp-items="ViewBag.@property.PropertyName"></select>
                 @:<span asp-validation-for="@property.PropertyName" class="text-danger"></span>
             @:</div>
@@ -71,8 +83,8 @@
             bool isCheckbox = property.TypeName.Equals("System.Boolean");
             if (isCheckbox)
             {
-        @:<div class="form-group">
-            @:<div class="col-md-offset-2 col-md-10">
+        @:<div class="pad-tight-b flex-row">
+            @:<div class="offset-tenths-3-l tenths-7">
                 @:<div class="checkbox">
                     @:<input asp-for="@property.PropertyName" />
                     @:<label asp-for="@property.PropertyName"></label>
@@ -82,9 +94,9 @@
             }
             else if (property.IsEnum && !property.IsEnumFlags)
             {
-        @:<div class="form-group">
-            @:<label asp-for="@property.PropertyName" class="col-md-2 control-label"></label>
-            @:<div class="col-md-10">
+        @:<div class="pad-tight-b flex-row">
+            @:<label asp-for="@property.PropertyName" class="tenths-3 control-label"></label>
+            @:<div class="tenths-7">
                 @:<select asp-for="@property.PropertyName" class="form-control"></select>
                 @:<span asp-validation-for="@property.PropertyName" class="text-danger"></span>
             @:</div>
@@ -92,9 +104,9 @@
             }
             else
             {
-        @:<div class="form-group">
-            @:<label asp-for="@property.PropertyName" class="col-md-2 control-label"></label>
-            @:<div class="col-md-10">
+        @:<div class="pad-tight-b flex-row">
+            @:<label asp-for="@property.PropertyName" class="tenths-3 control-label"></label>
+            @:<div class="tenths-7">
                 @:<input asp-for="@property.PropertyName" class="form-control" />
                 @:<span asp-validation-for="@property.PropertyName" class="text-danger"></span>
             @:</div>
@@ -109,9 +121,9 @@
         }
     }
 }
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        <div class="pad-tight-b flex-row">
+            <div class="offset-tenths-3-l tenths-7">
+                <input type="submit" value="Save" class="btn" />
             </div>
         </div>
     </div>

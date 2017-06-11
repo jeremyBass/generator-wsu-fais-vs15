@@ -8,6 +8,8 @@ var guid = require('uuid');
 var projectName = require('vs_projectname');
 var merge = require('merge'),
     original, cloned;
+var glob = require("glob");
+var fs = require("fs");
 var AspnetGenerator = yeoman.generators.Base.extend({
 
     constructor: function() {
@@ -291,9 +293,24 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                 // Views
                 var views_copy_options = { ignore: [] };
                 if (this.templatedata.features.indexOf('all') === -1 && this.templatedata.features.indexOf('datatable_indexes') === -1) {
-                    views_copy_options["ignore"].push("**/**/_datatables.cshtml");
+                    views_copy_options["ignore"].push('_datatables.cshtml');
+                    views_copy_options["ignore"].push('/_datatables.cshtml');
+                    views_copy_options["ignore"].push('Shared/_datatables.cshtml');
+                    views_copy_options["ignore"].push('/Shared/_datatables.cshtml');
                 }
-                this.fs.copyTpl(this.templatePath('Views/**/*'), this.applicationName + '/Views', this.templatedata, {}, template_copy_options);
+
+                this.log(chalk.green('views_copy_options'));
+                this.log(chalk.green(views_copy_options.ignore));
+                this.fs.copyTpl(this.templatePath('Views/**/*'), this.applicationName + '/Views', this.templatedata, { debug: true }, views_copy_options);
+                /*this.log(chalk.green(views_copy_options.ignore[0]));
+                if ("undefined" !== typeof views_copy_options.ignore[0]) {
+                    this.log(chalk.green('to delete'));
+                    this.log(chalk.green(views_copy_options.ignore));
+                    views_copy_options.ignore.forEach(function(_item) {
+                        this.fs.delete(_item, { cwd: this.applicationName + '/Views' });
+                    });
+                }*/
+
 
 
                 this.fs.copyTpl(this.templatePath('Theme/**/*'), this.applicationName + '/Theme', this.templatedata);

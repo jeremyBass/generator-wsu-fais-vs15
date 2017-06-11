@@ -101,6 +101,41 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                         return answers.type === 'web' || answers.type === 'webbasic';
                     }
 
+                },
+                {
+                    type: 'checkbox',
+                    name: 'features',
+                    message: 'What features',
+                    default: 'all',
+                    choices: [{
+                            name: 'All',
+                            value: 'all'
+                        },
+                        {
+                            name: 'DataTable indexes',
+                            value: 'datatable_indexes'
+                        },
+                        {
+                            name: 'Ajax Api',
+                            value: 'ajax'
+                        },
+                        {
+                            name: 'Import/Export Api',
+                            value: 'import_export'
+                        },
+                        {
+                            name: 'CSV support',
+                            value: 'csv'
+                        },
+                        {
+                            name: 'Charting and graphing',
+                            value: 'hicharts'
+                        }
+                    ],
+                    when: function(answers) {
+                        return answers.type === 'web' || answers.type === 'webbasic';
+                    }
+
                 }
             ];
 

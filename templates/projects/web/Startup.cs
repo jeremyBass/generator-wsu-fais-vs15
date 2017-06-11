@@ -18,10 +18,13 @@ using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
 using Microsoft.AspNetCore.Mvc;
-<%= if("undefined" !== typeof features["cors"] || "undefined" !== typeof features["all"]) { %>
+// <%= features %>
+// <%= features.join(',') %>
+// <%= "undefined" !== features["all"] %>
+// <%= features["all"] %>
+<% if ("undefined" !== features["cors"] || "undefined" !== features["all"]) { %>
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 <% } %>
-
 using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace <%= namespace %>
@@ -96,7 +99,7 @@ namespace <%= namespace %>
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
             });
 
-            <%= if("undefined" !== typeof features["cors"] || "undefined" !== typeof features["all"]) { %>
+            <% if ("undefined" !== features["cors"] || "undefined" !== features["all"]) { %>
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
@@ -106,7 +109,6 @@ namespace <%= namespace %>
                 options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAll"));
             });
             <% } %>
-
 
             services.RegisterDataTables();
             // Add application services.

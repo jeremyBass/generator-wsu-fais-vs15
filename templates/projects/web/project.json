@@ -39,6 +39,7 @@
         "Microsoft.Extensions.Logging.Debug": "1.1.0",
         "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
         "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
+        "Microsoft.VisualStudio.Web.CodeGeneration": "1.1.0-preview4-final",
         "Microsoft.VisualStudio.Web.CodeGeneration.Tools": {
             "version": "1.1.0-preview4-final",
             "type": "build"
@@ -52,8 +53,11 @@
         "Microsoft.AspNetCore.Session": "1.1.0",
         "Microsoft.NETCore": "5.0.1-rc2-24027",
         "BundlerMinifier.Core": "2.4.337",
-        "Microsoft.AspNetCore.ResponseCompression": "1.0.1",
+        "Microsoft.AspNetCore.ResponseCompression": "1.0.1"
+        <% if ("undefined" !== features["cors"] || "undefined" !== features["all"]) { %>,
         "Microsoft.AspNetCore.Cors": "1.1.1"
+        <% } %>
+
     },
 
     "tools": {

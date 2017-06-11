@@ -14,6 +14,7 @@ var AspnetGenerator = yeoman.generators.Base.extend({
         this.argument('type', { type: String, required: false, desc: 'the project type to create' });
         this.argument('applicationName', { type: String, required: false, desc: 'the name of the application' });
         this.argument('ui', { type: String, required: false, defaults: 'bootstrap', desc: 'the ui library to use (bootstrap OR semantic)' });
+        this.argument('features', { type: String, required: false, defaults: 'all', desc: 'What features to include on the app' });
     },
 
 
@@ -106,7 +107,7 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                     type: 'checkbox',
                     name: 'features',
                     message: 'What features',
-                    default: 'all',
+                    default: ['all'],
                     choices: [{
                             name: 'All',
                             value: 'all'
@@ -289,7 +290,7 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                 this.fs.copyTpl(this.templatePath('Views/**/*'), this.applicationName + '/Views', this.templatedata);
                 this.fs.copyTpl(this.templatePath('Theme/**/*'), this.applicationName + '/Theme', this.templatedata);
                 //Scaffolding\Templates
-                this.fs.copyTpl(this.templatePath('Templates/**/*'), this.applicationName + '/Templates', this.templatedata);
+                this.fs.copy(this.templatePath('Templates/**/*'), this.applicationName + '/Templates');
                 // wwwroot
                 // wwwroot - the content in the wwwroot does not include any direct references or imports
                 // So again it is copied 1-to-1 - but tests cover list of all files

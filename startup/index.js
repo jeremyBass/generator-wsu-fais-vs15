@@ -9,5 +9,5 @@ var Generator = module.exports = function Generator() {
 util.inherits(Generator, ScriptBase);
 
 Generator.prototype.createItem = function() {
-    this.generateTemplateFile('Startup.cs', 'Startup.cs', { namespace: this.namespace(), features: this.features });
+    this.generateTemplateFile('Startup.cs', 'Startup.cs', { namespace: this.namespace(), features: this.templatedata.features });
 };

@@ -36,9 +36,14 @@
         //    PushIndent("    ");
     }
 @:<p>
-    @:<a asp-action="Create">Create New</a>
+    @:<% if (features.indexOf("datatable_indexes") > -1 || features.indexOf("all") > -1 ) { %> <a href="#" id="dt_reset" class="btn float-right"><i class="fa fa-refresh"></i> Reset filters</a> <% } %>
+    @:<a asp-action="Create" class="btn"><i class="fa fa-plus-square"></i> Create New</a>
 @:</p>
-@:<table class="table">
+
+
+
+
+@:<table class="table <% if (features.indexOf("datatable_indexes") > -1 || features.indexOf("all") > -1 ) { %> dt <% } %>">
     @:<thead>
         @:<tr>
 

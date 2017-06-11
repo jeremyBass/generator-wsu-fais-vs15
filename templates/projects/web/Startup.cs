@@ -20,9 +20,9 @@ using System.IO.Compression;
 using Microsoft.AspNetCore.Mvc;
 // <%= features %>
 // <%= features.join(',') %>
-// <%= "undefined" !== features["all"] %>
+// <%= features.indexOf("cors") > -1 %>
 // <%= features["all"] %>
-<% if ("undefined" !== features["cors"] || "undefined" !== features["all"]) { %>
+<% if (features.indexOf("cors") > -1 || features.indexOf("all") > -1 ) { %>
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 <% } %>
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -99,7 +99,7 @@ namespace <%= namespace %>
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
             });
 
-            <% if ("undefined" !== features["cors"] || "undefined" !== features["all"]) { %>
+            <% if (features.indexOf("cors") > -1 || features.indexOf("all") > -1 ) { %>
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());

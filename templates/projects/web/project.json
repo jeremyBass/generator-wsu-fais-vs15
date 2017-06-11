@@ -54,7 +54,7 @@
         "Microsoft.NETCore": "5.0.1-rc2-24027",
         "BundlerMinifier.Core": "2.4.337",
         "Microsoft.AspNetCore.ResponseCompression": "1.0.1"
-        <% if ("undefined" !== features["cors"] || "undefined" !== features["all"]) { %>,
+        <% if (features.indexOf("cors") > -1 || features.indexOf("all") > -1 ) { %>,
         "Microsoft.AspNetCore.Cors": "1.1.1"
         <% } %>
 

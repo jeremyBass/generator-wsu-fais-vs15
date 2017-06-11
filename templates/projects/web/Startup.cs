@@ -33,7 +33,7 @@ namespace <%= namespace %>
             {
                 "/Theme/Views/{1}/{0}.cshtml",
                 "/Theme/Views/Shared/{0}.cshtml"
-            };//.Union(viewLocations);
+            }.Union(viewLocations);
         }
 }
     public class Startup

@@ -130,6 +130,10 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                         {
                             name: 'Charting and graphing',
                             value: 'hicharts'
+                        },
+                        {
+                            name: 'Allow Other WSU RESTful or media consumption (Cors)',
+                            value: 'cors'
                         }
                     ],
                     when: function(answers) {

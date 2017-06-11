@@ -18,7 +18,10 @@ using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
 using Microsoft.AspNetCore.Mvc;
+<%= if("undefined" !== typeof features["cors"] || "undefined" !== typeof features["all"]) { %>
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
+<% } %>
+
 using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace <%= namespace %>
@@ -35,7 +38,7 @@ namespace <%= namespace %>
                 "/Theme/Views/Shared/{0}.cshtml"
             }.Union(viewLocations);
         }
-}
+    }
     public class Startup
     {
         public Startup(IHostingEnvironment env)
@@ -92,6 +95,18 @@ namespace <%= namespace %>
                 options.CookieName = ".notices";
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
             });
+
+            <%= if("undefined" !== typeof features["cors"] || "undefined" !== typeof features["all"]) { %>
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+            });
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAll"));
+            });
+            <% } %>
+
 
             services.RegisterDataTables();
             // Add application services.

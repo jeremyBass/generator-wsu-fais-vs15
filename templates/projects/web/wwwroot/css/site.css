@@ -978,6 +978,7 @@ textarea {
 
 .development #header_bar {
     background: #FF5722;
+    background-image: url(/images/dev/dev-mark-bk.svg);
 }
 
 #content_wrap {

@@ -17,6 +17,9 @@ var AspnetGenerator = yeoman.generators.Base.extend({
 
         this.argument('type', { type: String, required: false, desc: 'the project type to create' });
         this.argument('applicationName', { type: String, required: false, desc: 'the name of the application' });
+        this.argument('SiteName', { type: String, required: false, desc: 'the name of the site' });
+        this.argument('SiteNameShort', { type: String, required: false, desc: 'the short name of the site' });
+        this.argument('ApplicationHostUrl', { type: String, required: false, desc: 'the url of the site' });
         this.argument('ui', { type: String, required: false, defaults: 'bootstrap', desc: 'the ui library to use (bootstrap OR semantic)' });
         this.argument('features', { type: String, required: false, defaults: 'all', desc: 'What features to include on the app' });
     },
@@ -47,6 +50,9 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                 this.log('"%s" is not a valid project type', chalk.cyan(this.type));
                 this.type = undefined;
                 this.applicationName = undefined;
+                this.SiteName = undefined;
+                this.SiteNameShort = undefined;
+                this.ApplicationHostUrl = undefined;
             } else {
                 this.log('Creating "%s" project', chalk.cyan(this.type));
             }
@@ -223,6 +229,9 @@ var AspnetGenerator = yeoman.generators.Base.extend({
             }];
             this.prompt(prompts, function(props) {
                 this.applicationName = props.applicationName;
+                this.SiteName = props.SiteName;
+                this.SiteNameShort = props.SiteNameShort;
+                this.ApplicationHostUrl = props.ApplicationHostUrl;
                 this._buildTemplateData();
                 done();
             }.bind(this));

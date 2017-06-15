@@ -1,3 +1,7 @@
+node_modules
 node_modules/**/*
 **/node_modules/**/*
 npm-debug.log
+node_modules/yeoman-generator/node_modules/download/node_modules/vinyl-fs/node_modules/glob-stream/node_modules/micromatch/node_modules/braces/node_modules/expand-range/node_modules/fill-range/node_modules/is-number/index.js
+node_modules/yeoman-generator/node_modules/download/node_modules/vinyl-fs/node_modules/glob-stream/node_modules/micromatch/node_modules/braces/node_modules/expand-range/node_modules/fill-range/node_modules/is-number/LICENSE
+node_modules/yeoman-generator/node_modules/download/node_modules/vinyl-fs/node_modules/glob-stream/node_modules/micromatch/node_modules/braces/node_modules/expand-range/node_modules/fill-range/node_modules/is-number/README.md

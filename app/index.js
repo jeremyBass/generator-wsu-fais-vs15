@@ -88,6 +88,7 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                         value: 'unittest'
                     }]
                 },
+
                 {
                     type: 'list',
                     name: 'ui',
@@ -160,6 +161,9 @@ var AspnetGenerator = yeoman.generators.Base.extend({
     _buildTemplateData: function() {
         this.templatedata.namespace = projectName(this.applicationName);
         this.templatedata.applicationname = this.applicationName;
+        this.templatedata.ApplicationHostUrl = this.ApplicationHostUrl;
+        this.templatedata.SiteName = this.SiteName;
+        this.templatedata.SiteNameShort = this.SiteNameShort;
         this.templatedata.guid = guid.v4();
         this.templatedata.sqlite = (this.type === 'web') ? true : false;
         this.templatedata.ui = this.ui;
@@ -200,6 +204,21 @@ var AspnetGenerator = yeoman.generators.Base.extend({
             var prompts = [{
                 name: 'applicationName',
                 message: 'What\'s the name of your ASP.NET application?',
+                default: app
+            },
+            {
+                name: 'SiteName',
+                message: 'What\'s the web display name? (NOTE: use full department name where possible)',
+                default: app
+            },
+            {
+                name: 'SiteNameShort',
+                message: 'What\'s the shortest web display name possible? (NOTE: try to keep it to an abbreviation like FAIS)',
+                default: app
+            },
+            {
+                name: 'ApplicationHostUrl',
+                message: 'What\'s the Base URL',
                 default: app
             }];
             this.prompt(prompts, function(props) {
@@ -243,7 +262,7 @@ var AspnetGenerator = yeoman.generators.Base.extend({
             case 'webapi':
                 this.sourceRoot(path.join(__dirname, '../templates/projects/' + this.type));
                 this.fs.copy(this.sourceRoot() + '/../../gitignore.txt', this.applicationName + '/.gitignore');
-                this.copy(this.sourceRoot() + '/appsettings.json', this.applicationName + '/appsettings.json');
+                this.fs.copyTpl(this.sourceRoot() + '/appsettings.json', this.applicationName + '/appsettings.json', this.templatedata);
                 this.fs.copyTpl(this.sourceRoot() + '/../../Dockerfile.txt', this.applicationName + '/Dockerfile', this.templatedata);
                 this.fs.copyTpl(this.sourceRoot() + '/../../Dockerfile.nano.txt', this.applicationName + '/Dockerfile.nano', this.templatedata);
                 this.fs.copyTpl(this.sourceRoot() + '/Startup.cs', this.applicationName + '/Startup.cs', this.templatedata);
@@ -284,6 +303,8 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                 this.fs.copyTpl(this.templatePath('Models/ApplicationUser.cs'), this.applicationName + '/Models/ApplicationUser.cs', this.templatedata);
                 this.fs.copyTpl(this.templatePath('Models/AccountViewModels/**/*'), this.applicationName + '/Models/AccountViewModels', this.templatedata);
                 this.fs.copyTpl(this.templatePath('Models/ManageViewModels/**/*'), this.applicationName + '/Models/ManageViewModels', this.templatedata);
+                // Configuration
+                this.fs.copyTpl(this.templatePath('Configuration/**/*'), this.applicationName + '/Configuration', this.templatedata);
                 // Properties
                 this.fs.copyTpl(this.templatePath('Properties/**/*'), this.applicationName + '/Properties', this.templatedata);
                 // Services
@@ -301,7 +322,7 @@ var AspnetGenerator = yeoman.generators.Base.extend({
 
                 this.log(chalk.green('views_copy_options'));
                 this.log(chalk.green(views_copy_options.ignore));
-                this.fs.copyTpl(this.templatePath('Views/**/*'), this.applicationName + '/Views', this.templatedata, { debug: true }, views_copy_options);
+                this.fs.copyTpl(this.templatePath('Views/**/*'), this.applicationName + '/Views', this.templatedata, { debug: true }, {globOptions:views_copy_options});
                 /*this.log(chalk.green(views_copy_options.ignore[0]));
                 if ("undefined" !== typeof views_copy_options.ignore[0]) {
                     this.log(chalk.green('to delete'));
@@ -316,7 +337,7 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                 this.fs.copyTpl(this.templatePath('Theme/**/*'), this.applicationName + '/Theme', this.templatedata);
                 //Scaffolding\Templates
                 var template_copy_options = { ignore: [] };
-                this.fs.copyTpl(this.templatePath('Templates/**/*'), this.applicationName + '/Templates', this.templatedata, {}, template_copy_options);
+                this.fs.copyTpl(this.templatePath('Templates/**/*'), this.applicationName + '/Templates', this.templatedata, {}, {globOptions:template_copy_options});
                 // wwwroot
                 // wwwroot - the content in the wwwroot does not include any direct references or imports
                 // So again it is copied 1-to-1 - but tests cover list of all files

@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
 using Microsoft.AspNetCore.Mvc;
+using AspNetCoreInjectConfigurationRazor.Configuration;
 // <%= features %>
 // <%= features.join(',') %>
 // <%= features.indexOf("cors") > -1 %>
@@ -66,6 +67,8 @@ namespace <%= namespace %>
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.Configure<ApplicationConfigurations>(Configuration.GetSection("ApplicationConfigurations"));
             services.Configure<RazorViewEngineOptions>(options =>
             {
                 options.ViewLocationExpanders.Add(new ViewLocationExpander());

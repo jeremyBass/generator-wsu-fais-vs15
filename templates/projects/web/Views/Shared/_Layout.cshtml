@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+@{
+    @using Microsoft.Extensions.Options;
+    @using AspNetCoreInjectConfigurationRazor.Configuration;
+    @inject IOptions<ApplicationConfigurations> SiteSettings
+}<!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js no-svg lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="<?=$lang ?>"> <![endif]-->
 <!--[if IE 7]><html class="no-js no-svg lt-ie10 lt-ie9 lt-ie8" lang="<?=$lang ?>"> <![endif]-->
 <!--[if IE 8]><html class="no-js no-svg lt-ie10 lt-ie9" lang="<?=$lang ?>"> <![endif]-->
@@ -10,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - <%= namespace %></title>
+    <title>@ViewData["Title"] - @SiteSettings.Value.SiteName</title>
     <!-- FAVICON -->
     <link rel="shortcut icon" href="https://repo.wsu.edu/spine/1/favicon.ico" />
 

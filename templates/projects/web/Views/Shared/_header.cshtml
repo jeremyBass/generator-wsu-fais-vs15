@@ -1,4 +1,8 @@
-﻿<div class="no-print fixed-top z-index-4  full-width paper" id="header_bar" style="z-index: 101;">
+﻿@{
+    @using Microsoft.Extensions.Options;
+    @using AspNetCoreInjectConfigurationRazor.Configuration;
+    @inject IOptions<ApplicationConfigurations> SiteSettings
+}<div class="no-print fixed-top z-index-4  full-width paper" id="header_bar" style="z-index: 101;">
     <div id="main_menu" class="z-index-2">
         <label for="menu-state" id="wsu-signature">Washington State University</label>
         <input type="checkbox" id="menu-state">
@@ -6,7 +10,7 @@
             @await Html.PartialAsync("_main_nav")
         </div><!---->
     </div>
-    <a href="/" id="home_link"><span class="display-none-at-667">Sponsored Programs Services</span><span class="display-none display-inline-at-667">SPS</span></a>
+    <a href="/" id="home_link"><span class="display-none-at-667">@SiteSettings.Value.SiteName</span><span class="display-none display-inline-at-667">@SiteSettings.Value.SiteNameShort</span></a>
     <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
         @await Html.PartialAsync("_ToolBar")
         @await Html.PartialAsync("_LoginPartial")

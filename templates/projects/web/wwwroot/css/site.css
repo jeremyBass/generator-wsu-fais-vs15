@@ -1023,10 +1023,13 @@ div#main_menu {
 
 #nav_area {
     opacity: 0;
-    transform: scale3d(.1, .1, .1) translate3d( 0, -1000px, 0);
+    transform: scale3d(.1, .1, .1) translate3d( 0, -1000px,0);
     height: 100vh;
     /*height: 0;
     width:0;*/
+    max-width: 275px;
+    width: 100%;
+    min-width: 200px;
     overflow: hidden;
     background-color: #3b4042;
     max-height: calc(100vh - (3.1rem + 3.4rem));
@@ -1035,10 +1038,10 @@ div#main_menu {
     padding-bottom: 3.6rem;
     top: 2.9rem;
     /*top:3.1rem;*/
-    left: 0;
-    position: absolute;
+        left: 0;
+    position:absolute;
     overflow-wrap: break-word;
-    box-shadow: 0 3px 1px -2px rgba(31, 25, 0, .2), 0 2px 2px 0 rgba(31, 25, 0, .14), 0 1px 5px 0 rgba(31, 25, 0, .12), 0 5px 5px -3px rgba(31, 25, 0, .2), 0 8px 10px 1px rgba(31, 25, 0, .14), 0 3px 14px 2px rgba(31, 25, 0, .12);
+    box-shadow:0 3px 1px -2px rgba(31,25,0,.2), 0 2px 2px 0 rgba(31,25,0,.14), 0 1px 5px 0 rgba(31,25,0,.12), 0 5px 5px -3px rgba(31,25,0,.2), 0 8px 10px 1px rgba(31,25,0,.14), 0 3px 14px 2px rgba(31,25,0,.12);
 }
 
 #nav_area * {

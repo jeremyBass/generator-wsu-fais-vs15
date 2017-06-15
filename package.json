@@ -1,8 +1,8 @@
 {
     "name": "generator-wsu-fais-vs15",
     "fork": "generator-aspnet",
-    "version": "0.2.19",
-    "description": "Yeoman generator for ASP.NET Core apps",
+    "version": "0.2.20",
+    "description": "Yeoman generator for ASP.NET Core apps at Washington State University",
     "license": "Apache-2.0",
     "main": "app/index.js",
     "repository": {
@@ -27,7 +27,9 @@
         ".net",
         "net",
         "core",
-        "dnx"
+        "dnx",
+        "WSU",
+        "Washington State University"
     ],
     "dependencies": {
         "chai": "^3.3.0",

@@ -26,6 +26,11 @@ using AspNetCoreInjectConfigurationRazor.Configuration;
 <% if (features.indexOf("cors") > -1 || features.indexOf("all") > -1 ) { %>
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 <% } %>
+<% if (features.indexOf("swagger") > -1 || features.indexOf("all") > -1 ) { %>
+using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.Extensions.PlatformAbstractions;
+using System.IO;
+<% } %>
 using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace <%= namespace %>
@@ -117,6 +122,27 @@ namespace <%= namespace %>
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            <% if (features.indexOf("swagger") > -1 || features.indexOf("all") > -1 ) { %>
+                // Register the Swagger generator, defining one or more Swagger documents
+                services.AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new Info
+                    {
+                        Version = "v1",
+                        Title = "WSU HTTP API",
+                        Description = "This service exposes common services needed for WSU infastructures.  Only public services will be freely listed, although they could still meet with locks.  Seek help from FAIS for services not listed.",
+                        TermsOfService = "None",
+                        Contact = new Contact { Name = "Jeremy Bass", Email = "jeremy.bass@wsu.edu", Url = "https://fais.wp.wsu.edu" },
+                        License = new License { Name = "NOTYOURS", Url = "if you are not whitelisted you just can't" }
+                    });
+                    //Set the comments path for the swagger json and ui.
+                    var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                    var xmlPath = Path.Combine(basePath, "rest.fais.wsu.edu.xml");
+                    c.IncludeXmlComments(xmlPath);
+                });
+            <% } %>
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -135,13 +161,32 @@ namespace <%= namespace %>
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseIdentity();
+
+            <% if (features.indexOf("swagger") > -1 || features.indexOf("all") > -1 ) { %>
+            app.UseDefaultFiles();
+            <% } %>
 
             app.UseStaticFiles();
 
-            app.UseIdentity();
+
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
             app.UseSession();
+
+            <% if (features.indexOf("swagger") > -1 || features.indexOf("all") > -1 ) { %>
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = "docs";
+                //c.SwaggerEndpoint("/docs/v1/wsu_restful.json", "v1.0.0");swagger
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1.0.0");
+            });
+            <% } %>
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

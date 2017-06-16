@@ -57,6 +57,9 @@
         <% if (features.indexOf("cors") > -1 || features.indexOf("all") > -1 ) { %>,
         "Microsoft.AspNetCore.Cors": "1.1.1"
         <% } %>
+        <% if (features.indexOf("swagger") > -1 || features.indexOf("all") > -1 ) { %>,
+        "Swashbuckle.AspNetCore": "1.0.0"
+        <% } %>
 
     },
 

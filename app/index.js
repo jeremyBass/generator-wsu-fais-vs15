@@ -128,6 +128,10 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                             value: 'datatable_indexes'
                         },
                         {
+                            name: 'Swagger API docs',
+                            value: 'swagger'
+                        },
+                        {
                             name: 'Ajax Api',
                             value: 'ajax'
                         },

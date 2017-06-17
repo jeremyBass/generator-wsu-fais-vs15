@@ -6,6 +6,32 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+
+// may not be needed but we will keep as a better stub.  After all is said and done
+// it is expected that there will be the using's clean up performed
+<% if (features.indexOf("cors") > -1 || features.indexOf("all") > -1 ) { %>
+using Microsoft.AspNetCore.Cors;
+<% } %>
+<% if (features.indexOf("datatable_indexes") > -1 || features.indexOf("all") > -1 ) { %>
+using DataTables.AspNet.Core;
+using DataTables.AspNet.AspNetCore;
+<% } %>
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using System.Text;
+using System.Data.Common;
+using System.Globalization;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+<% if (features.indexOf("csv") > -1 || features.indexOf("all") > -1 ) { %>
+using CsvHelper;
+<% } %>
+using System.IO;
+using System.Data;
+using System.Data.SqlClient;
+using System.Dynamic;
+
 @{string modelName = (Model.ClassName.EndsWith("Controller")? Model.ClassName.Substring(0,Model.ClassName.Length-10): Model.ClassName);}
 namespace @Model.NamespaceName
 {

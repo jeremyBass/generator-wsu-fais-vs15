@@ -148,12 +148,47 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                             value: 'hicharts'
                         },
                         {
-                            name: 'Allow Other WSU RESTful or media consumption (Cors)',
+                            name: 'ACCESS:: Allow Other WSU RESTful or media consumption (Cors)',
                             value: 'cors'
                         }
                     ],
                     when: function(answers) {
                         return answers.type === 'web' || answers.type === 'webbasic';
+                    }
+
+                },
+                {
+                    type: 'checkbox',
+                    name: 'features',
+                    message: 'What features',
+                    default: ['all'],
+                    choices: [{
+                            name: 'All',
+                            value: 'all'
+                        },
+                        {
+                            name: 'Swagger API docs',
+                            value: 'swagger'
+                        },
+                        {
+                            name: 'Ajax Api',
+                            value: 'ajax'
+                        },
+                        {
+                            name: 'Import/Export Api',
+                            value: 'import_export'
+                        },
+                        {
+                            name: 'CSV support',
+                            value: 'csv'
+                        },
+                        {
+                            name: 'ACCESS:: Allow Other WSU RESTful or media consumption (Cors)',
+                            value: 'cors'
+                        }
+                    ],
+                    when: function(answers) {
+                        return answers.type === 'webapi';
                     }
 
                 }
@@ -212,25 +247,26 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                     break;
             }
             var prompts = [{
-                name: 'applicationName',
-                message: 'What\'s the name of your ASP.NET application?',
-                default: app
-            },
-            {
-                name: 'SiteName',
-                message: 'What\'s the web display name? (NOTE: use full department name where possible)',
-                default: app
-            },
-            {
-                name: 'SiteNameShort',
-                message: 'What\'s the shortest web display name possible? (NOTE: try to keep it to an abbreviation like FAIS)',
-                default: app
-            },
-            {
-                name: 'ApplicationHostUrl',
-                message: 'What\'s the Base URL',
-                default: app
-            }];
+                    name: 'applicationName',
+                    message: 'What\'s the name of your ASP.NET application?',
+                    default: app
+                },
+                {
+                    name: 'SiteName',
+                    message: 'What\'s the web display name? (NOTE: use full department name where possible)',
+                    default: app
+                },
+                {
+                    name: 'SiteNameShort',
+                    message: 'What\'s the shortest web display name possible? (NOTE: try to keep it to an abbreviation like FAIS)',
+                    default: app
+                },
+                {
+                    name: 'ApplicationHostUrl',
+                    message: 'What\'s the Base URL',
+                    default: app
+                }
+            ];
             this.prompt(prompts, function(props) {
                 this.applicationName = props.applicationName;
                 this.SiteName = props.SiteName;
@@ -335,7 +371,7 @@ var AspnetGenerator = yeoman.generators.Base.extend({
 
                 this.log(chalk.green('views_copy_options'));
                 this.log(chalk.green(views_copy_options.ignore));
-                this.fs.copyTpl(this.templatePath('Views/**/*'), this.applicationName + '/Views', this.templatedata, { debug: true }, {globOptions:views_copy_options});
+                this.fs.copyTpl(this.templatePath('Views/**/*'), this.applicationName + '/Views', this.templatedata, { debug: true }, { globOptions: views_copy_options });
                 /*this.log(chalk.green(views_copy_options.ignore[0]));
                 if ("undefined" !== typeof views_copy_options.ignore[0]) {
                     this.log(chalk.green('to delete'));
@@ -350,7 +386,7 @@ var AspnetGenerator = yeoman.generators.Base.extend({
                 this.fs.copyTpl(this.templatePath('Theme/**/*'), this.applicationName + '/Theme', this.templatedata);
                 //Scaffolding\Templates
                 var template_copy_options = { ignore: [] };
-                this.fs.copyTpl(this.templatePath('Templates/**/*'), this.applicationName + '/Templates', this.templatedata, {}, {globOptions:template_copy_options});
+                this.fs.copyTpl(this.templatePath('Templates/**/*'), this.applicationName + '/Templates', this.templatedata, {}, { globOptions: template_copy_options });
                 // wwwroot
                 // wwwroot - the content in the wwwroot does not include any direct references or imports
                 // So again it is copied 1-to-1 - but tests cover list of all files

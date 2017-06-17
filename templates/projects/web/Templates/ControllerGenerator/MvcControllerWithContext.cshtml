@@ -21,6 +21,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text;
 using System.Data.Common;
 using System.Globalization;
+using System.Reflection;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
@@ -131,7 +132,14 @@ namespace @Model.ControllerNamespace
             // If you want something rather easier, check IEnumerableExtensions Sample.
             var filteredData = String.IsNullOrWhiteSpace(request.Search.Value)
                 ? data
-                : data.Where(_item => _item.JSON_OBJ == null || CultureInfo.CurrentCulture.CompareInfo.IndexOf(_item.JSON_OBJ, request.Search.Value, CompareOptions.IgnoreCase) >= 0);
+                : data.Where(m =>
+                                m.GetType().GetProperties()
+                                    .Any(x =>
+                                            x.GetValue(m, null) != null
+                                            && CultureInfo.CurrentCulture.CompareInfo
+                                                .IndexOf(x.GetValue(m, null).ToString(), request.Search.Value, CompareOptions.IgnoreCase) >= 0
+                                        )
+                             );
 
             // Paging filtered data.
             // Paging is rather manual due to in-memmory (IEnumerable) data.
@@ -147,6 +155,7 @@ namespace @Model.ControllerNamespace
         }
 <% }else { %>
         // GET: @routePrefix
+@{
         @:public async Task<IActionResult> Index()
         @:{
     var includeExpressions = "";
@@ -164,13 +173,6 @@ namespace @Model.ControllerNamespace
     }
 }        }
 <% } %>
-@{
-
-
-
-
-
-
 
 
 

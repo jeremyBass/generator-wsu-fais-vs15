@@ -13,12 +13,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Cors;
 <% } %>
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.Identity;
 using System.Text;
 using System.Data.Common;
+using System.Globalization;
+using System.Reflection;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+<% if (features.indexOf("csv") > -1 || features.indexOf("all") > -1 ) { %>
+using CsvHelper;
+<% } %>
+using System.IO;
+using System.Data;
+using System.Data.SqlClient;
+using System.Dynamic;
 
 @{
     foreach (var namespaceName in Model.RequiredNamespaces)

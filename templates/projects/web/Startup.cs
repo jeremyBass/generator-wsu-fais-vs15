@@ -137,7 +137,7 @@ namespace <%= namespace %>
                     });
                     //Set the comments path for the swagger json and ui.
                     var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                    var xmlPath = Path.Combine(basePath, "rest.fais.wsu.edu.xml");
+                    var xmlPath = Path.Combine(basePath, "<%= namespace %>.xml");
                     c.IncludeXmlComments(xmlPath);
                 });
             <% } %>
@@ -183,7 +183,7 @@ namespace <%= namespace %>
             {
                 c.RoutePrefix = "docs";
                 //c.SwaggerEndpoint("/docs/v1/wsu_restful.json", "v1.0.0");swagger
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1.0.0");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
             });
             <% } %>
 

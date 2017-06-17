@@ -89,6 +89,9 @@
     "buildOptions": {
         "emitEntryPoint": true,
         "preserveCompilationContext": true
+        <% if (features.indexOf("swagger") > -1 || features.indexOf("all") > -1 ) { %>,
+        "xmlDoc": true
+        <% } %>
     },
 
     "runtimeOptions": {

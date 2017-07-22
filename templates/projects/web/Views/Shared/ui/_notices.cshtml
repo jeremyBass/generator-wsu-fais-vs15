@@ -1,0 +1,18 @@
+﻿@foreach (var _notice in Model?.notices)
+{
+    @if (_notice != null)
+    {
+        <div class="alert @_notice?.level z-index-2">
+            @Html.Raw(@_notice?.title)
+            @Html.Raw(@_notice?.message)
+            @if (!String.IsNullOrWhiteSpace(_notice?.code)) {
+                @if (!String.IsNullOrWhiteSpace(_notice?.code)) {
+                    @:CODE: @_notice?.code
+                }
+                @if (!String.IsNullOrWhiteSpace(_notice?.support)) {
+                    @:@Html.Raw(@_notice?.support)
+                }
+            }
+        </div>
+    }
+}

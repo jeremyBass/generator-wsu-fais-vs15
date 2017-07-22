@@ -54,6 +54,7 @@ namespace <%= namespace %>
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("sitesettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
@@ -72,8 +73,11 @@ namespace <%= namespace %>
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var site_settings = Configuration.GetSection("site_settings");
+            services.Configure<SiteSettings>(site_settings);
 
-            services.Configure<ApplicationConfigurations>(Configuration.GetSection("ApplicationConfigurations"));
+            SiteSettings settings = services.BuildServiceProvider().GetService<IOptions<SiteSettings>>().Value;
+
             services.Configure<RazorViewEngineOptions>(options =>
             {
                 options.ViewLocationExpanders.Add(new ViewLocationExpander());
@@ -84,11 +88,11 @@ namespace <%= namespace %>
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 4;
+                options.Password.RequireDigit = settings.password_options.RequireDigit;
+                options.Password.RequireLowercase = settings.password_options.RequireLowercase;
+                options.Password.RequireNonAlphanumeric = settings.password_options.RequireNonAlphanumeric;
+                options.Password.RequireUppercase = settings.password_options.RequireUppercase;
+                options.Password.RequiredLength = settings.password_options.RequiredLength;
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -102,9 +106,9 @@ namespace <%= namespace %>
 
             services.AddSession(options =>
             {
-                options.CookieHttpOnly = true;
-                options.CookieName = ".notices";
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.CookieHttpOnly = settings.session_options.CookieHttpOnly;
+                options.CookieName = settings.session_options.CookieName;
+                options.IdleTimeout = TimeSpan.FromSeconds(settings.session_options.IdleTimeout);
             });
 
             <% if (features.indexOf("cors") > -1 || features.indexOf("all") > -1 ) { %>

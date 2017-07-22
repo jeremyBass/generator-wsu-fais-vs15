@@ -1,0 +1,19 @@
+{
+    "site_settings": {
+        "ApplicationHostUrl": "<%= ApplicationHostUrl %>",
+        "SiteName": "<%= SiteName %>",
+        "SiteNameShort": "<%= SiteNameShort %>",
+        "Support": "Your friendly partners at FAIS are working to address this, but please feel free to [contact for more information or concerns](mailto:fail@wsu.edu).",
+        "tips": [{
+                "title": "Server Tip:",
+                "level": "info",
+                "message": "A **`staging` site** is a site that you prep date while testing new features and functionality that will go in to the production environment."
+            },
+            {
+                "title": "Editing Tip:",
+                "level": "info",
+                "message": "You are able to use hotkeys such as `Ctrl + c` to copy, but also use the `tab` key to move through the inputs"
+            }
+        ]
+    }
+}

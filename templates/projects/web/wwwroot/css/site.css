@@ -802,10 +802,7 @@ ul.ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content li a:hover {
 
 .tt-dropdown-menu {}
 
-
-.tt-dropdown-menu {
-
-}
+.tt-dropdown-menu {}
 
 .tt-menu {
     background: #fff;
@@ -816,11 +813,13 @@ ul.ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content li a:hover {
     overflow-y: auto;
     z-index: 9999 !important;
 }
-.tt-selectable:hover,.tt-selectable.tt-cursor {
+
+.tt-selectable:hover,
+.tt-selectable.tt-cursor {
     background-color: #348ed8;
     color: #fff;
-    cursor:pointer;
-    box-shadow: 0 3px 1px -2px rgba(31,25,0,.2), 0 2px 2px 0 rgba(31,25,0,.14), 0 1px 5px 0 rgba(31,25,0,.12);
+    cursor: pointer;
+    box-shadow: 0 3px 1px -2px rgba(31, 25, 0, .2), 0 2px 2px 0 rgba(31, 25, 0, .14), 0 1px 5px 0 rgba(31, 25, 0, .12);
 }
 
 #award_lookup {
@@ -993,6 +992,19 @@ textarea {
     background-image: url(/images/dev/dev-mark-bk.svg);
 }
 
+.staging #header_bar {
+    background: #22acff;
+    background-image: url(/images/dev/stage-mark-bk.svg);
+}
+
+.development a#home_link {
+    color: #f5f5f5;
+}
+
+.staging a#home_link {
+    color: #f5f5f5;
+}
+
 #content_wrap {
     margin: 3.1rem 0 3rem 0;
     overflow: auto;
@@ -1035,7 +1047,7 @@ div#main_menu {
 
 #nav_area {
     opacity: 0;
-    transform: scale3d(.1, .1, .1) translate3d( 0, -1000px,0);
+    transform: scale3d(.1, .1, .1) translate3d( 0, -1000px, 0);
     height: 100vh;
     /*height: 0;
     width:0;*/
@@ -1050,10 +1062,10 @@ div#main_menu {
     padding-bottom: 3.6rem;
     top: 2.9rem;
     /*top:3.1rem;*/
-        left: 0;
-    position:absolute;
+    left: 0;
+    position: absolute;
     overflow-wrap: break-word;
-    box-shadow:0 3px 1px -2px rgba(31,25,0,.2), 0 2px 2px 0 rgba(31,25,0,.14), 0 1px 5px 0 rgba(31,25,0,.12), 0 5px 5px -3px rgba(31,25,0,.2), 0 8px 10px 1px rgba(31,25,0,.14), 0 3px 14px 2px rgba(31,25,0,.12);
+    box-shadow: 0 3px 1px -2px rgba(31, 25, 0, .2), 0 2px 2px 0 rgba(31, 25, 0, .14), 0 1px 5px 0 rgba(31, 25, 0, .12), 0 5px 5px -3px rgba(31, 25, 0, .2), 0 8px 10px 1px rgba(31, 25, 0, .14), 0 3px 14px 2px rgba(31, 25, 0, .12);
 }
 
 #nav_area * {
@@ -1407,10 +1419,6 @@ a#home_link {
     line-height: 2.9rem;
     font-weight: 700;
     color: #616567;
-}
-
-.development a#home_link {
-    color: #f5f5f5;
 }
 
 @media only screen and (max-width: 996px) {

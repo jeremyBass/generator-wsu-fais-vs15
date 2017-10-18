@@ -1,14 +1,16 @@
-# generator-aspnet
+# generator-wsu-fais-vs15
 
-[![Build Status](https://travis-ci.org/OmniSharp/generator-aspnet.svg?branch=master)](https://travis-ci.org/OmniSharp/generator-aspnet)
-![Version](https://img.shields.io/npm/v/generator-aspnet.svg)
-![Downloads per month](https://img.shields.io/npm/dm/generator-aspnet.svg)
+##### forked to start from generator-aspnet
 
-> NOTE: The content has been updated for .NET Core 1.1.0 (`project.json` based). For more info see https://github.com/OmniSharp/generator-aspnet/wiki/Version-info
+[![Build Status](https://travis-ci.org/OmniSharp/generator-wsu-fais-vs15.svg?branch=master)](https://travis-ci.org/OmniSharp/generator-wsu-fais-vs15)
+![Version](https://img.shields.io/npm/v/generator-wsu-fais-vs15.svg)
+![Downloads per month](https://img.shields.io/npm/dm/generator-wsu-fais-vs15.svg)
+
+> NOTE: The content has been updated for .NET Core 1.1.0 (`project.json` based). For more info see https://github.com/OmniSharp/generator-wsu-fais-vs15/wiki/Version-info
 
 Yeoman generator for ASP.NET Core projects
 
-[![](https://cloud.githubusercontent.com/assets/14539/16569731/0590dada-423a-11e6-997c-1e1e20b1d37e.gif)](https://github.com/OmniSharp/generator-aspnet 'ASP.NET Core Generator')
+[![](https://cloud.githubusercontent.com/assets/14539/16569731/0590dada-423a-11e6-997c-1e1e20b1d37e.gif)](https://github.com/OmniSharp/generator-wsu-fais-vs15 'ASP.NET Core Generator')
 
 ## Getting Started
 
@@ -16,7 +18,7 @@ Yeoman generator for ASP.NET Core projects
     - Node.js: `brew install node` for Mac OS X, `choco install nodejs` for Windows OS
     - Yeoman: `npm install -g yo`
     - Bower `npm install -g bower`
-- Install: `npm install -g generator-aspnet`
+- Install: `npm install -g generator-wsu-fais-vs15`
 - Run: `yo aspnet`
 
 See also: [Building Projects with Yeoman on docs.asp.net](https://docs.asp.net/en/latest/client-side/yeoman.html?#building-projects-with-yeoman)
@@ -92,10 +94,10 @@ The valid UI framework types are:
 
 ## Related yeoman generators
 
-The goal of `generator-aspnet` is to provide an experience consistent with creating new ASP.NET Core `dotnet cli` projects
+The goal of `generator-wsu-fais-vs15` is to provide an experience consistent with creating new ASP.NET Core `dotnet cli` projects
 and files in Visual Studio 2015.
 
-The list of related generators [can be seen on our Wiki section](https://github.com/OmniSharp/generator-aspnet/wiki#related-yeoman-generators)
+The list of related generators [can be seen on our Wiki section](https://github.com/OmniSharp/generator-wsu-fais-vs15/wiki#related-yeoman-generators)
 
 ## Sub Generators
 
